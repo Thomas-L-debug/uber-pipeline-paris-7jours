@@ -1,0 +1,22 @@
+{
+  "name": "Uber Paris Ingestion",
+  "sourceDefinitionId": "source-definition-http-api",
+  "destinationDefinitionId": "destination-s3",
+  "sourceConfiguration": {
+    "api_url": "https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2023-01.parquet",
+    "sync_frequency": "5 minutes"
+  },
+  "destinationConfiguration": {
+    "s3_bucket_name": "uber-raw-paris-2025",
+    "s3_bucket_path": "raw/uber_trips/",
+    "s3_bucket_region": "eu-west-3",
+    "s3_access_key_id": "arn:aws:s3:::uber-raw-paris-2025",
+    "s3_secret_access_key": "YOUR_AWS_SECRET"
+  },
+  "schedule": {
+    "basic_schedule": {
+      "time_unit": "minutes",
+      "units": 5
+    }
+  }
+}

@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: raw
+    database: UBER_PIPELINE  # le nom de ta database
+    schema: PUBLIC
+    tables:
+      - name: yellow_tripdata_2023_01
+        description: "Raw Uber/NYC Taxi data from S3"

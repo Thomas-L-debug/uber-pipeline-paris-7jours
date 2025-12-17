@@ -11,14 +11,14 @@ conn = st.connection("snowflake")
 def load_data():
     query = """
     SELECT 
-        tpep_pickup_datetime as pickup,
-        tpep_dropoff_datetime as dropoff,
+        tpep_pickup_datetime as pickup_datetime,
+        tpep_dropoff_datetime as dropoff_datetime,
         passenger_count,
         trip_distance,
         total_amount
     FROM RAW_UBER_TRIPS
-    LIMIT 50000  -- échantillon pour la carte (plus rapide)
-    """
+    LIMIT 50000
+"""
     return conn.query(query)
 
 df = load_data()
@@ -27,8 +27,9 @@ st.write("### Aperçu des données brutes (3,1 M lignes chargées depuis S3)")
 st.dataframe(df.head(10))
 
 st.write("### Total amount par jour")
-daily = df.set_index('pickup').resample('D')['total_amount'].sum().reset_index()
-fig = px.line(daily, x='pickup', y='total_amount', title="CA par jour (janvier 2023)")
+daily = df.groupby(df['pickup_datetime'].dt.date)['total_amount'].sum().reset_index()
+daily.columns = ['date', 'total_amount']
+fig = px.line(daily, x='date', y='total_amount', title="CA par jour (janvier 2023)")
 st.plotly_chart(fig)
 
 st.write("### Distance moyenne par nombre de passagers")

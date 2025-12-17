@@ -19,7 +19,7 @@ select
     total_amount,
     congestion_surcharge,
     airport_fee
-from {{ source('raw', 'yellow_tripdata_2023_01') }}
+from {{ source('raw', 'RAW_UBER_TRIPS') }}
 where pickup_datetime is not null
   and dropoff_datetime is not null
   and total_amount > 0

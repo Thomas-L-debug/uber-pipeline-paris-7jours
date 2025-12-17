@@ -7,6 +7,7 @@ st.title("Uber Pipeline Paris – Dashboard Live (3,1 M trips depuis S3)")
 # Connection sécurisée via Streamlit Secrets (pas de password en clair)
 conn = st.connection("snowflake")
 
+
 @st.cache_data(ttl=3600)  # Cache 1 heure pour éviter de recharger à chaque refresh
 def load_data():
     query = """

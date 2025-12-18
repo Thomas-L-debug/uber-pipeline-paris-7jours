@@ -8,7 +8,7 @@ Pipeline end-to-end S3 → Streamlit live
 - 5-dashboard : app.py Streamlit live
 
 ## Démo live
-https://uber-pipeline-paris-7jours.streamlit.app  # ton URL
+[https://uber-pipeline-paris-7jours.streamlit.app](https://uber-pipeline-paris-7jours-hd3qcmqxyyxgqnm9fotrapp.streamlit.app/)
 
 ## Technologies
 - AWS S3

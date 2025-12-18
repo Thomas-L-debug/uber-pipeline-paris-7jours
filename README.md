@@ -1,24 +1,28 @@
 # Uber Pipeline Paris – Data Engineer Project (Jedha Lead)
 
-## Overview
-Pipeline end-to-end : Ingestion Uber/NYC Taxi data every 5 min → S3 raw → dbt transform → Airflow orchestrate → Streamlit dashboard.
+Pipeline end-to-end S3 → Streamlit live
 
 ## Structure
-- 1-ingestion : Airbyte config
-- 2-raw : S3 bucket check
-- 3-transformed : dbt models
-- 4-orchestration : Airflow DAG
-- 5-dashboard : Streamlit app
+- 1-ingestion : config Airbyte (en backup)
+- 2-raw : bucket S3 uber-raw-paris-2025 + check-bucket.py
+- 5-dashboard : app.py Streamlit live
 
-## Setup
-1. AWS S3 bucket: uber-raw-paris-2025
-2. Airbyte Cloud: Import airbyte-connection.json
-3. dbt Cloud: Connect to S3, run models
-4. Astronomer: Deploy DAG
-5. Streamlit: Deploy app.py
+## Démo live
+https://uber-pipeline-paris-7jours.streamlit.app  # ton URL
 
-## Demo
-[Live Dashboard](https://ton-app.streamlit.app)  
-[Screenshots] (add images)
+## Technologies
+- AWS S3
+- Pandas + Plotly
+- Streamlit Cloud (déploiement gratuit)
 
-Built in 7 days for Jedha application – Dec 2025.
+## Note sur les parties non activées
+
+- **3-transformed** (dbt models) : Modèles prêts, mais non exécutés à cause des limitations du trial Snowflake sur les external stages S3 (création de stage avec credentials bloquée).
+- **4-orchestration** (Airflow DAG) : DAG prêt, mais non déployé (Astronomer free tier limité pour ce POC).
+- **Focus actuel** : Le pipeline fonctionnel est **S3 raw → Streamlit live** (lecture directe Parquet depuis S3, dashboard interactif).
+
+Le projet montre la structure complète d’un pipeline, avec la partie live (S3 + dashboard) pleinement opérationnelle.
+
+Prochaine étape en entreprise : déploiement dbt + Airflow sur un compte Snowflake payant ou Databricks.
+
+Projet réalisé en 7 jours pour candidature Jedha Lead – Décembre 2025
